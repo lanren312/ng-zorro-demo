@@ -1,0 +1,325 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >农药产品名称 </nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="pesticideName" id="pesticideName" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8">登记证号</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="certificateNo" id="certificateNo"/>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >农药类型 </nz-form-label>
+                <nz-form-control>
+                    <nz-select class="single-choice" formControlName = "pesticideClass" id="pesticideClass">
+                        <nz-option nzValue="原药" nzLabel="原药"></nz-option>
+                        <nz-option nzValue="制剂" nzLabel="制剂"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >农药种类 </nz-form-label>
+                <nz-form-control>
+                    <nz-select class="single-choice" formControlName="pesticideType" id="pesticideType">
+                        <nz-option nzValue="化学农药" nzLabel="化学农药"></nz-option>
+                        <nz-option nzValue="生物化学农药" nzLabel="生物化学农药"></nz-option>
+                        <nz-option nzValue="植物源农药" nzLabel="植物源农药"></nz-option>
+                        <nz-option nzValue="微生物农药" nzLabel="微生物农药"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >农药类别 </nz-form-label>
+                <nz-form-control>
+                    <nz-select formControlName="pesticideCategory" id="pesticideCategory">
+                        <nz-option nzValue="jack" nzLabel="杀虫剂"></nz-option>
+                        <nz-option nzValue="lucy" nzLabel="杀菌剂"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >总有效成分含量 </nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="totalContent" id="totalContent"/>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >剂型 </nz-form-label>
+                <nz-form-control>
+                    <nz-select class="single-choice" formControlName="dosageForm" id="dosageForm" >
+                        <nz-option nzValue="jack" nzLabel="悬浮剂"></nz-option>
+                        <nz-option nzValue="lucy" nzLabel="悬乳剂"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired >毒性 </nz-form-label>
+                <nz-form-control>
+                    <nz-select class="single-choice" formControlName="toxicity" id="toxicity">
+                        <nz-option nzValue="jack" nzLabel="低毒"></nz-option>
+                        <nz-option nzValue="lucy" nzLabel="微毒"></nz-option>
+                        <nz-option nzValue="jack" nzLabel="中等毒"></nz-option>
+                        <nz-option nzValue="lucy" nzLabel="高毒"></nz-option>
+                        <nz-option nzValue="jack" nzLabel="剧毒"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+
+    <nz-form-item>
+        <nz-form-label nzRequired  [nzSm]="3" [nzXs]="24">有效成分及含量 </nz-form-label>
+        <nz-form-control >
+            <nz-table #contentActiveIngredientsTable nzBordered [nzData]="contentActiveIngredientsData" nzShowPagination = 'false'>
+                <thead>
+                    <tr>
+                        <th nzWidth="35%" style="text-align:center;">中文通用名称</th>
+                        <th nzWidth="35%" style="text-align:center;">国际通用名称</th>
+                        <th nzWidth="30%" style="text-align:center;">含量</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of contentActiveIngredientsTable.data" class="editable-row">
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startContentActiveIngredientsEdit(data.id)">
+                                {{ data.pesticideNameCN }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.pesticideNameCN" (blur)="stopContentActiveIngredientsEdit()" />                        
+                            </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startContentActiveIngredientsEdit(data.id)">
+                                {{ data.pesticideNameEN }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.pesticideNameEN" (blur)="stopContentActiveIngredientsEdit()" />   
+                        </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startContentActiveIngredientsEdit(data.id)">
+                                {{ data.content }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.content" (blur)="stopContentActiveIngredientsEdit()" />   
+                        </td>
+                        <td>
+                            <a nz-popconfirm nzPopconfirmTitle="确定要删除?" 
+                                (nzOnConfirm)="deleteContentActiveIngredientsRow(data.id)">
+                                <i nz-icon nzType="minus-circle" nzTheme="outline"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <br/>
+           <nz-form-control [nzSpan]="14" [nzOffset]="10">
+                <button nz-button (click)="addContentActiveIngredientsRow()" nzType="primary">
+                    <i nz-icon nzType="plus-circle" nzTheme="outline"></i></button>
+            </nz-form-control>
+        </nz-form-control>
+    </nz-form-item>     
+
+    <nz-form-item>
+        <nz-form-label nzRequired [nzSm]="3" [nzXs]="24">使用范围和使用方法 </nz-form-label>
+        <nz-form-control >
+            <nz-table #usecopeAndMethodTable nzBordered [nzData]="usecopeAndMethodData" nzShowPagination = 'false'>
+                <thead>
+                    <tr>
+                        <th nzWidth="20%" style="text-align:center;">作物/场所</th>
+                        <th nzWidth="20%" style="text-align:center;">防治对象</th>
+                        <th nzWidth="20%" style="text-align:center;">有效成分用药量</th>
+                        <th nzWidth="20%" style="text-align:center;">制剂用药量</th>
+                        <th nzWidth="20%" style="text-align:center;">施用方法</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of usecopeAndMethodTable.data" class="editable-row">
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startUsecopeAndMethodEdit(data.id)">
+                                {{ data.crop }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.crop" (blur)="stopUsecopeAndMethodEdit()" />                        
+                            </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startUsecopeAndMethodEdit(data.id)">
+                                {{ data.controlObject }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.controlObject" (blur)="stopUsecopeAndMethodEdit()" />   
+                        </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startUsecopeAndMethodEdit(data.id)">
+                                {{ data.dosageActiveIngredients }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.dosageActiveIngredients" (blur)="stopUsecopeAndMethodEdit()" />   
+                        </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startUsecopeAndMethodEdit(data.id)">
+                                {{ data.dosagePreparation }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.dosagePreparation" (blur)="stopUsecopeAndMethodEdit()" />   
+                        </td>
+                        <td>
+                            <div class="editable-cell" [hidden]="editId === data.id" (click)="startUsecopeAndMethodEdit(data.id)">
+                                {{ data.applicationMethod }}
+                            </div>
+                            <input type="text" nz-input [(ngModel)]="data.applicationMethod" (blur)="stopUsecopeAndMethodEdit()" />   
+                        </td>
+                        <td>
+                            <a nz-popconfirm nzPopconfirmTitle="确定要删除?" 
+                                (nzOnConfirm)="deleteUsecopeAndMethodRow(data.id)">
+                                <i nz-icon nzType="minus-circle" nzTheme="outline"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <br/>
+            <nz-form-control [nzSpan]="14" [nzOffset]="10">
+                <button nz-button (click)="addUsecopeAndMethodRow()" nzType="primary">
+                    <i nz-icon nzType="plus-circle" nzTheme="outline"></i></button>
+            </nz-form-control>
+        </nz-form-control>  
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">产品性能 </nz-form-label>
+        <nz-form-control>
+            <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>本品是具双酰胺结构的杀虫剂，作为昆虫GABA受体拮抗剂，抑制靶标昆虫的神经传递，导致抽搐、最终死亡。本品具有良好的触杀、胃毒作用，杀虫活性高，持效期长，正常使用条件下对登记作物安全。</textarea>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">使用技术要求 </nz-form-label>
+        <nz-form-control>
+            <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>1.在小菜蛾和甜菜夜蛾卵孵盛期至低龄幼虫发生期，进行叶面均匀喷雾。可视虫害发生情况，于第一次施药后7~14天进行第二次防治。2.配药前，先将药剂用少量水稀释，再加到所需水量，搅拌均匀后喷雾使用。3.本品在甘蓝上的安全间隔期7天，每季最多使用2次。</textarea>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">注意事项 </nz-form-label>
+        <nz-form-control>
+            <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>1.使用本品时应穿戴手套、口罩、雨靴等防护措施，避免药液接触皮肤或眼睛等身体部位。2.施药期间不可进食、饮水和吸烟等。施药后应及时洗手和洗脸。3.使用本品时，应避开（周围）开花植物花期，蚕室及桑园附近禁用，赤眼蜂和瓢虫等天敌放飞区禁用。</textarea>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">中毒急救措施 </nz-form-label>
+        <nz-form-control>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">中毒症状 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">急救措施 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">皮肤接触 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>若皮肤接触，立即用肥皂和大量清水清洗至少30分钟，同时脱下受污染衣物和鞋子。如仍感不适，立即携标签就医。</textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">眼睛溅入 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>若眼睛溅入，用清水小心清洗至少15分钟。若戴有隐形眼镜且方便取下，取出隐形眼镜后继续冲洗。如仍感不适，请立即携标签就医。</textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">吸入 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>若不慎吸入，立即将受害者移至空气新鲜处，必要时给予氧气或进行人工呼吸。如仍感不适，立即携标签就医。</textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">误食 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>若不慎误食，请勿催吐，可用水漱口并立即携标签就医，如受害者不自主呕吐，曲身以防止呕吐物进入肺部，切勿给无意识患者喂服任何东西。本品暂无专用解毒剂，请对症治疗。</textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="2" [nzXs]="24">特效解毒剂 </nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>若眼睛溅入，用清水小心清洗至少15分钟。若戴有隐形眼镜且方便取下，取出隐形眼镜后继续冲洗。如仍感不适，请立即携标签就医。</textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">储存和运输方法 </nz-form-label>
+        <nz-form-control>
+            <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>本品应储存于干燥、阴凉、通风、防雨处，保持容器密闭；远离火源和热源，远离氧化剂、还原剂、强酸和强碱；置于儿童接触不到的地方并加锁保存。</textarea>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">质量保证期 </nz-form-label>
+        <nz-form-control>
+            <input nz-input style="width: 80px;" value="3"/>&nbsp;&nbsp;<span>年</span>
+        </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24">备注 </nz-form-label>
+        <nz-form-control>
+            <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize>这是一个好的产品，你值得拥有</textarea>
+        </nz-form-control>
+    </nz-form-item>
+        
+    <nz-form-item nz-row class="button-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="10">
+            <button nz-button [nzType]="'primary'" (click)="showModal()"><span>保存</span></button>
+            <nz-modal
+                [(nzVisible)]="isVisible"
+                [nzTitle]="modalTitle"
+                [nzContent]="modalContent"
+                [nzFooter]="modalFooter"
+                (nzOnCancel)="handleCancel()"
+            >
+                <ng-template #modalTitle>提交：</ng-template>
+                <ng-template #modalContent>
+                    <p align="center">农药产品信息保存成功！</p>
+                    <p align="center">请选择接下来的操作：</p>
+                </ng-template>
+                <ng-template #modalFooter>
+                    <button
+                        nz-button
+                        nzType="primary"
+                        style="margin-right:10px"
+                        routerLink = "/pesticideProducts/index"
+                    >前往农药产品信息列表</button>
+                    <button
+                        nz-button
+                        nzType="default"
+                        style="margin-right: 80px;"
+                        (click)='gotoMaterialAddStepOne()'>
+                    >前往创建资料</button>
+                </ng-template>
+            </nz-modal>
+            <button nz-button nzType="default" routerLink="/pesticideProducts/index">返回</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>

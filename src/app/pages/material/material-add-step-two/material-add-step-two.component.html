@@ -1,0 +1,45 @@
+<form nz-form>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>农药名称 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <label nz-checkbox ><span>新农药</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>新剂型</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>新含量</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>新混配</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>新使用范围</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>新使用方法</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>相同制剂，使用范围和使用方法相同</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>相同制剂，使用范围和使用方法不同</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>相似制剂，使用范围和使用方法相同</span></label>
+            <br />
+            <br />
+            <label nz-checkbox ><span>相似制剂，使用范围和使用方法不同</span></label>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="button-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" routerLink="/material/addStepOne">上一步</button>
+          <button nz-button nzType="primary" routerLink="/material/edit">创建</button>
+          <button nz-button nzType="default" routerLink="/material/index">返回</button>
+        </nz-form-control>
+      </nz-form-item>
+
+</form>  

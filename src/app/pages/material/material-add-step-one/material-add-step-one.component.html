@@ -1,0 +1,57 @@
+<form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24">农药名称 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <input nz-input formControlName="pesticideName" id ="pesticideName" [disabled]="true" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24">农药种类 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <input nz-input formControlName="pesticideType" id ="pesticideType" [disabled]="true" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24">农药类型 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <input nz-input formControlName="pesticideClass"  id ="pesticideClass" [disabled]="true" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>申请类型 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <nz-select formControlName="applyType">
+                <nz-option nzValue="" nzLabel="农药登记"></nz-option>
+                <nz-option nzValue="" nzLabel="登记变更"></nz-option>
+                <nz-option nzValue="" nzLabel="仅限出口"></nz-option>
+                <nz-option nzValue="" nzLabel="信息添加申请"></nz-option>
+                <nz-option nzValue="" nzLabel="登记证持有人变更"></nz-option>
+                <nz-option nzValue="" nzLabel="登记证更正补发"></nz-option>
+                <nz-option nzValue="" nzLabel="标签重新核准"></nz-option>
+                <nz-option nzValue="" nzLabel="农药登记证延续"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>申请类别 </nz-form-label>
+        <nz-form-control [nzSm]="8" [nzXs]="24">
+            <nz-select formControlName="applyCategory">
+                <nz-option nzValue="" nzLabel="农林用"></nz-option>
+                <nz-option nzValue="" nzLabel="卫生用"></nz-option>
+                <nz-option nzValue="" nzLabel="杀鼠用"></nz-option>
+              </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="button-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button nzType="primary" routerLink="/material/addStepTwo">下一步</button>
+            <button nz-button nzType="default" routerLink="/material/index">返回</button>
+        </nz-form-control>
+    </nz-form-item>
+    
+</form>  

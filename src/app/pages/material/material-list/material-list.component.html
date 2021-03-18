@@ -1,0 +1,68 @@
+<form nz-form >
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="8">农药名称 </nz-form-label>
+          <nz-form-control>
+            <input nz-input id="pesticideId" [disabled]="true"/>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="8">农药种类 </nz-form-label>
+          <nz-form-control>
+            <input nz-input id="pesticideId" [disabled]="true" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="8">农药类型 </nz-form-label>
+          <nz-form-control>
+            <input nz-input id="pesticideId" [disabled]="true" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+</form>
+
+<div nz-col [nzSpan]="24" style="margin-top: 10px;">
+    <button nz-button nzType="primary" routerLink="/material/edit"><i nz-icon nzType="plus-square" nzTheme="outline" style="font-size: 25px;"></i>创建</button>
+  </div>
+  <div class="search-result-list">
+    <nz-table #basicTable [nzData]="listOfData" nzShowPagination nzShowSizeChanger nzShowQuickJumper = 'true'>
+      <thead>
+        <tr>
+          <th style="text-align:center;">序号</th>
+          <th style="text-align:center;">申请单号</th>
+          <th style="text-align:center;">申请类型</th>
+          <th style="text-align:center;">申请类别</th>
+          <th style="text-align:center;">登记类别</th>
+          <th style="text-align:center;">类型</th>
+          <th style="text-align:center;">更新时间</th>
+          <th style="text-align:center;">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td style="text-align:center;">{{ data.key }}</td>
+          <td style="text-align:center;">{{ data.applyNo }}</td>
+          <td style="text-align:center;">{{ data.applyType }}</td>
+          <td style="text-align:center;">{{ data.applyCategory }}</td>
+          <td style="text-align:center;">{{ data.registCategory }}</td>
+          <td style="text-align:center;">{{ data.materialType }}</td>
+          <td style="text-align:center;">{{ data.updateTime }}</td>
+          <td style="text-align:center;">
+            <a routerLink="/material/edit">编辑</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>删除</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a routerLink="/material/edit">补交</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>

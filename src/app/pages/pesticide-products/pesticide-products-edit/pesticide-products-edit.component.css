@@ -1,0 +1,34 @@
+.ant-advanced-search-form {
+  padding: 24px;
+  background: #fbfbfb;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+
+[nz-form-label] {
+  overflow: visible;
+}
+
+.single-choice{
+  width: 200px;
+}
+
+button {
+  margin-left: 30px;
+}
+
+.editable-cell {
+  position: relative;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.editable-row:hover .editable-cell {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 11px;
+}
+
+.button-area{
+  margin-bottom: 8px;
+}
